@@ -25,6 +25,7 @@ Constraints:
 1 <= nums.length <= 1000
 -10^6 <= nums[i] <= 10^6
  */
+
 class RunningSums {
     fun calculateRunningSums(nums: IntArray): IntArray {
         var runningSum = 0
