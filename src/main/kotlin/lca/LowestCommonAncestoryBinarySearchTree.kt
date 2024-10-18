@@ -1,7 +1,5 @@
 package org.example.lca
 
-import kotlin.math.max
-
 class TreeNode(var `val`: Int = 0) {
     var left: TreeNode? = null
     var right: TreeNode? = null
@@ -72,19 +70,19 @@ class LowestCommonAncestoryBinarySearchTree {
 
         queue.addLast(root)
         // Basically explore whole tree, unless return is met.
-        while (queue.isNotEmpty()){
+        while (queue.isNotEmpty()) {
             // take first element from queue.
             val node = queue.removeFirstOrNull()
 
             // Check if it's not been visited before:
-            if(node !in visited) {
+            if (node !in visited) {
                 // Visit it.
                 visited.add(node)
 
                 // Check if the node is within the two numbers inclusively p, q
                 // Given it's a binary tree for any p, q the first number between them
                 // Will be the LCA.
-                if(node.withinRange(p,q)) {
+                if (node.withinRange(p, q)) {
                     return node
                 }
 
@@ -96,16 +94,44 @@ class LowestCommonAncestoryBinarySearchTree {
         // If not found, then return null, some error state really.
         return null
     }
+
     private fun TreeNode?.withinRange(p: TreeNode?, q: TreeNode?): Boolean {
-        if(p != null && q != null && this!=null) {
+        if (p != null && q != null && this != null) {
             val min = minOf(p.`val`, q.`val`)
             val max = maxOf(p.`val`, q.`val`)
 
-            if(this.`val` in min..max) {
+            if (this.`val` in min..max) {
                 return true
             }
         }
         return false
+    }
+
+    /**
+     * Obviously we can exploit a Binary search tree, knowing that left had side is less than node
+     * and right hand side is greater than node.
+     * If for any given node, both p and q are less than that node x, we can explore left side
+     * else If for any given node, both p and q are more than node x, we can explore right side
+     * else, i.e p and q are both not bigger or smaller, i.e they are either smaller and larger respectively
+     * we can return the current node as the LCA.
+     */
+    fun solveWithoutBFS(root: TreeNode?, p: TreeNode?, q: TreeNode?): TreeNode? {
+        if (p == null || q == null) return null
+        var current = root
+
+        while (current != null) {
+            when {
+                current.`val` > p.`val` && current.`val` > q.`val` -> current = current.left
+                p.`val` > current.`val` && q.`val` > current.`val` -> current = current.right // Move down more side
+                else -> return current
+                // Else We've found or node whereby both conditions are not met
+                // I.e p > nodeToExplore < q or:
+                // I.e q > nodeToExplore < p
+                // Hence it's the LCA
+            }
+        }
+
+        return null
     }
 }
 

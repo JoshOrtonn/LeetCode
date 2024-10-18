@@ -55,4 +55,27 @@ class LowestCommonAncestoryBinarySearchTreeTest{
         assertEquals(treeNode6, lca.solve(input, p, q))
     }
 
+    @Test
+    fun shouldFindLCAWithoutBFSEx1(){
+        val p = treeNode2
+        val q = treeNode8
+        assertEquals(treeNode6, lca.solveWithoutBFS(input, p, q))
+
+    }
+
+    @Test
+    fun shouldFindLCAWithoutBFSEx2(){
+        val p = treeNode2
+        val q = treeNode4
+        assertEquals(treeNode2, lca.solveWithoutBFS(input, p, q))
+
+    }
+
+    @Test
+    fun shouldFindLCAWithoutBFSEx3(){
+        val p = treeNode2
+        val q = treeNode9
+        assertEquals(treeNode6, lca.solveWithoutBFS(input, p, q))
+    }
+
 }
