@@ -44,6 +44,22 @@ class TreeNode(var `val`: Int = 0) {
  * p != q
  * p and q will exist in the BST.
  */
+
+/**
+ * Do Breadth first search from root.
+ * Add root node to queue
+ *
+ * Then do bfs, while queue is not empty()
+ * essentially visit all nodes in breadth manner, unless return statement met:
+ * (min >= x <= max) via sorting p and q, where x is the LCA.
+ * take from first in queue, check it's not already been visited, visit it
+ * Check if it's betweeen p and q, if not then add it's children to the queue
+ * repeat above until either queue is empty, exhausted all nodes, or return statement met.
+ *
+ * Take root, check if it's between the two numbers p and q
+ *
+ * Adding child nodes to queue
+ */
 class LowestCommonAncestoryBinarySearchTree {
     private fun ArrayDeque<TreeNode?>.doesNotContain(p: TreeNode?, q: TreeNode?): Boolean {
         return (this.contains(p) && this.contains(q))
@@ -85,7 +101,7 @@ class LowestCommonAncestoryBinarySearchTree {
             val min = minOf(p.`val`, q.`val`)
             val max = maxOf(p.`val`, q.`val`)
 
-            if(this.`val` >= min && max >= this.`val`) {
+            if(this.`val` in min..max) {
                 return true
             }
         }
