@@ -48,4 +48,9 @@ class PalindromeTest {
     fun assertExpectedAACase() {
         assertTrue(palindrome.isPalindrome( "aa"))
     }
+
+    @Test
+    fun assertExpectedTrueRaceeCar() {
+        assertTrue(palindrome.isPalindromeStack( "racecar"))
+    }
 }
