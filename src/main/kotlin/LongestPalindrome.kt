@@ -16,6 +16,7 @@ class LongestPalindrome {
             }
         }
 
+        // If set is not empty, we can add another one as a middle char
         return if (setOfChars.isNotEmpty()) {
             palindromeCounter + 1
         } else {
