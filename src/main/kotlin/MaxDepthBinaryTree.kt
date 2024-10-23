@@ -49,6 +49,8 @@ class MaxDepthBinaryTree {
 
     // Peek is imperative in Post order traversal
     // TODO maybe look to improve iterative's space effiency
+    // TODO does it need to be post order??
+    // Previously the diameter did, but maybe this does not..
     fun maxDepthIterative(root: TreeNode?): Int {
         val stack = ArrayDeque<TreeNode?>()
         val visited = mutableSetOf<TreeNode?>()
