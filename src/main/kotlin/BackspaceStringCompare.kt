@@ -70,4 +70,63 @@ class BackspaceStringCompare {
 
         return true
     }
+
+    // Slightly better than a stack, but still not O(1)
+    fun backspaceCompareSolvedForMemory(s: String, t: String): Boolean {
+        val sString = buildString {
+            s.forEach { sChar ->
+                if(sChar == '#') {
+                    if(this.lastIndex > -1){
+                        deleteCharAt(this.lastIndex)
+                    }
+                } else {
+                    append(sChar)
+                }
+            }
+        }
+        val tString = buildString {
+            t.forEach { tChar ->
+                if(tChar == '#'){
+                    deleteCharAt(this.lastIndex)
+                } else {
+                    append(tChar)
+                }
+            }
+        }
+
+        return tString == sString
+    }
+
+    // For O(1) memory should use two pointers for each string, checking each incrementally I think.
+    // Perhaps working from back to front, and if see a hash we can skip over.
+    // TODO: Continue this two pointer work.
+    fun backspaceCompareSolvedForMemoryV2(s: String, t: String): Boolean {
+        var sIndex = s.lastIndex
+        var tIndex = t.lastIndex
+        var sHashes = 0
+        var tHashes = 0
+
+        while (sIndex >= 0 && tIndex >=0) {
+            if(s[sIndex] != t[tIndex] && (tHashes == 0 && sHashes == 0)){
+                return false
+            }
+            if(s[sIndex] == '#'){
+                sHashes++
+            } else {
+                sHashes--
+                sIndex--
+            }
+            if(t[tIndex] == '#'){
+                tHashes++
+            } else {
+                tHashes--
+                tIndex--
+            }
+            // working way down past
+            sIndex -= 1
+            tIndex -= 1
+        }
+
+        return sIndex == tIndex
+    }
 }
