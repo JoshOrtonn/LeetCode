@@ -1,7 +1,5 @@
 package org.example
 
-import org.example.BinaryTreeDiameter.TreeNode
-
 /**
  * Example:
  * var ti = TreeNode(5)
@@ -42,52 +40,51 @@ class BinaryTreeDiameter {
         var right: TreeNode? = null
     }
 
-    // Uses DFS for Post Order traversal
-    // But exceeeds time limit sadly.
-    fun diameterOfBinaryTree(root: TreeNode?): Int {
-        if(root?.right == null && root?.left == null) return 0
+    // Uses DFS for Post Order traversal L, R, N
+    // Fast runtime
+    // Slower for memory
 
+    fun diameterOfBinaryTree(root: TreeNode?): Int {
         // Conduct Depth first search at least to reach all nodes,
-        // counting the number of steps to reach from root.
-        // Doing it in a post-order traversal so go left, go right then calcualte height
+        // Doing it in a post-order traversal so go left, go right then calculate height and diameter
         // Best way is to count upwards from leaf node whereby height is 1.
-        // And add up left + right at each node.
+        // And add up left + right heights at each node.
         val stack = ArrayDeque<TreeNode?>()
-        val helperHashmap = hashMapOf<TreeNode, Int>()
+        val heightHashmap = hashMapOf<TreeNode, Int>()
+        var maxDiameter = 0
         val visited = mutableSetOf<TreeNode?>()
         stack.addFirst(root)
 
         while (stack.isNotEmpty()) {
-//            val node = stack.removeFirst() // should we peek instead?
-            val node = stack.firstOrNull() // Peek is key
+            // Peek is key for Post order traversal
+            // If next node found as null, just return the max diameter
+            val node = stack.firstOrNull() ?: return maxDiameter
 
-            if(node != null && node !in visited) {
+            // node not been visited
+            if (node !in visited) {
+                // Add it to visited node, so we don't add it's children or itself again.
                 visited.add(node)
-                if (node.left == null && node.right == null) {
-                    // height at this leaf node is 0
-                    helperHashmap.put(node, 1)
-                    // Pop after storing height
-                    stack.removeFirstOrNull()
-                } else {
-                    // Add it's non-null neighbours, continue until we see all neighbours
-                    node.right?.let { stack.addFirst(it) }
-                    node.left?.let { stack.addFirst(it) }
-                }
-            } else if(node !=null && node in visited) {
-                // Should always have left and right, really.
-                // Not trueee
-                val leftHeight = helperHashmap.getOrDefault(node.left, 0)
-                val rightHeight = helperHashmap.getOrDefault(node.right, 0)
-                // Pop after storing height
-                stack.removeFirstOrNull()
-                helperHashmap.put(node, leftHeight+rightHeight)
-            } else {
-                // Removing null from stack, but really we should prevent nulls from being added.
+                node.right?.let { stack.addFirst(it) } // R (of post order, collect all first, then do work on N)
+                node.left?.let { stack.addFirst(it) } // L (of post order)
+
+            } else if (node in visited) {
+                // Given stack will be built with leafmost at the top, we can calculate heights bottom up.
+                // So at leaf most the height of it's subtrees are 0, but of itself is 1 + maxOF(LH, RH) so 1.
+                // And work upwards from there.
+                val leftHeight = heightHashmap.getOrDefault(node.left, 0)
+                val rightHeight = heightHashmap.getOrDefault(node.right, 0)
+
+                val heightOfCurrentNode = 1 + maxOf(leftHeight, rightHeight)
+                val diameterOfCurrentNode = leftHeight + rightHeight
+
+                heightHashmap.put(node, heightOfCurrentNode)
+                maxDiameter = maxOf(maxDiameter, diameterOfCurrentNode)
+
+                // Pop after storing height, N(of Post order)
                 stack.removeFirstOrNull()
             }
-
         }
 
-        return helperHashmap.maxOf { it.value }
+        return maxDiameter
     }
 }
