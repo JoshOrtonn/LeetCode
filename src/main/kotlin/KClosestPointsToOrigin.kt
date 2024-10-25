@@ -1,7 +1,6 @@
 package org.example
 
 import java.util.PriorityQueue
-import java.util.SortedMap
 
 /***
  * Given an array of points where points[i] = [xi, yi] represents a point on the X-Y plane and an integer k,
@@ -75,7 +74,6 @@ class KClosestPointsToOrigin {
                 add(intArrayOf(item.first.first, item.first.second))
             }
         }
-
 
         return sortedOutput.toTypedArray()
     }
