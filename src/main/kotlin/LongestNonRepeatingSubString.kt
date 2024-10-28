@@ -8,22 +8,26 @@ class LongestNonRepeatingSubString {
         var maxSubstring = 0
         val charIntHashMap = hashMapOf<Char, Int>()
 
-        var movingGoalPosts = s
+        var mutableInputString = s
 
-        movingGoalPosts.forEachIndexed { index, char ->
-            val previousCharIndex = charIntHashMap.put(char, index+1)
-
+        mutableInputString.forEachIndexed { index, char ->
+            val previousCharIndex = charIntHashMap.put(char, index)
+            // If no previous char found, iterate longest subString as clash not found
             if(previousCharIndex == null) {
                 longestSubstring++
                 maxSubstring = maxOf(maxSubstring, longestSubstring)
             } else {
-                // this doesn't work..
-                val charsToRemove: String = movingGoalPosts.substringBefore(char)
+                // Clash found, update mutableInput string to remove all chars, before the clash
+                // Then remove them from the hashmap so they are allowed to be included again in longest substring.
+                val charsToRemove: String = mutableInputString.substringBefore(char)
                 charsToRemove.forEach {
                     charIntHashMap.remove(it)
                 }
-                movingGoalPosts = movingGoalPosts.substringAfter(char)
-                longestSubstring = abs(index+1 - previousCharIndex)
+
+                // Then remove the first char after the clash.
+                mutableInputString = mutableInputString.substringAfter(char)
+                // Calc the new longestSubstring based on the difference of the two indexes
+                longestSubstring = abs(index - previousCharIndex)
                 maxSubstring = maxOf(maxSubstring, longestSubstring)
             }
         }
