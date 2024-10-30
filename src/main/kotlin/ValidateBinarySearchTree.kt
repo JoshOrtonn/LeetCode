@@ -44,87 +44,28 @@ class ValidateBinarySearchTree {
     }
 
     fun isValidBST(root: TreeNode?): Boolean {
-        if(root != null) {
-            if(root.left != null){
-                if(root.left!!.`val` >= root.`val`) return false
-            }
-            if(root.right != null){
-                if(root.right!!.`val` <= root.`val`) return false
-            }
-
-            if(!isValidLeftSubtree(root.left, root.`val`)) return false
-            if(!isValidRightSubtree(root.right, root.`val`)) return false
-        }
-        // If no invalid case met, we can assume it's true.
-        return true
+        // Helper function that checks if the tree is a valid BST within the range (low, high)
+        // Start the recursion with the entire range of valid values for a BST
+        return helper(root, Long.MIN_VALUE, Long.MAX_VALUE)
     }
 
-    // In a binary search tree, every node to the right (including all ancestors), must be greater
-    // The same goes for the left sub trees, every node to the left, including all ancestors must be less than.
-    // so for:
-
-    /*
-                            32
-                        26      47
-                    19              56
-                        27
-
-           It should be false, given left of 32 is 26, fine, but that should be the new MAX value within it.
-           Left of 26 should be less than 26
-           But right of 19 should be more than 19, but less than 27!!
-           So need to keep a running min and max value I think
-           I think max value for leftSubtree
-           Max is running total of left hand subtree, presumably it should be
-           running min value for rightSubtree
-
-     */
-    private fun isValidLeftSubtree(node: TreeNode?, maxValue: Int): Boolean {
-        // Base case we got to here, and no falses met.
-        if(node == null){
+    private fun helper(node: TreeNode?, low: Long, high: Long): Boolean {
+        // Base case: null nodes are valid BSTs
+        if (node == null) {
             return true
         }
-
-        if(node.left != null){
-            if(node.left!!.`val` >= node.`val`) return false
+        // The current node's value must be greater than 'low' and less than 'high'
+        if (node.`val` <= low || node.`val` >= high) {
+            return false
         }
-        if(node.right != null){
-            if(node.right!!.`val` <= node.`val` || node.right!!.`val` >= maxValue) return false
-        }
-
-
-        // Going left the new max is current val.
-        // So 26 should be set here first, I wonder then, if 19 is set,
-        if(!isValidLeftSubtree(node = node.left, node.`val`)) return false
-        if(!isValidLeftSubtree(node = node.right, maxValue)) return false
-
-        // should reach here once all of left subtree is exhausted.. I think.
-        return true
+        // Recursively validate the left and right subtrees
+        // Left subtree values must be < node.`val`
+        // Hence pass along current node as high value
+        val left = helper(node.left, low, node.`val`.toLong())
+        // Right subtree values must be > node.`val`,
+        // hence pass along the current node as the new low given we need the right subtree below to > than.
+        val right = helper(node.right, node.`val`.toLong(), high)
+        // Return true if both subtrees are valid
+        return left && right
     }
-
-    private fun isValidRightSubtree(node: TreeNode?, minValue: Int): Boolean {
-        // Base case we got to here, and no falses met.
-        if(node == null){
-            return true
-        }
-        var newMin = minValue
-
-        if(node.left != null) {
-            if(node.left!!.`val` >= node.`val` || node.left!!.`val` <= minValue) return false
-            newMin = minOf(newMin, node.`val`)
-        }
-        if(node.right != null){
-            if(node.right!!.`val` <= node.`val` || node.right!!.`val` <= minValue) return false
-        }
-
-
-        if(!isValidRightSubtree(node.left, newMin)) return false
-        if(!isValidRightSubtree(node.right, node.`val`)) return false
-
-        // should reach here once all of left subtree is exhausted.. I think.
-        return true
-    }
-
-
-
-
 }
