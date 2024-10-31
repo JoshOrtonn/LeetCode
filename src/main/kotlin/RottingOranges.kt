@@ -60,30 +60,38 @@ class RottingOranges {
 
     fun orangesRotting(grid: Array<IntArray>): Int {
         val visited = mutableSetOf<Coordinates>()
-        var minutes = 0
+        var freshOranges = 0
 
-        val queue = ArrayDeque<Coordinates>()
+        // Queue should contain pair of coordinates, and the value it was added to the queue, to find shortest path.
+        // Such that take off queue and increment by 1 the neighbours that are added.
+        val queue = ArrayDeque<Pair<Coordinates, Int>>()
 
         for (row in 0..grid.lastIndex) {
             for (column in 0..grid[0].lastIndex) {
-                if (grid[row][column] == 2 && !visited.contains(Coordinates(row, column))) {
-                    queue.addLast(Coordinates(row, column))
-                    minutes += doBFS(queue, visited, grid)
+                if (grid[row][column] == 2) {
+                    queue.addLast(Coordinates(row, column) to 0)
+                } else if(grid[row][column] == 1){
+                    freshOranges += 1
                 }
             }
         }
 
-        for (i in 0..grid.lastIndex) {
-            for (j in 0..grid[0].lastIndex) {
-                if (grid[i][j] == 1) return -1
-            }
-        }
+        // Clue was in the third use case for min 0 checking
+        if(freshOranges == 0) return 0
+
+        // Do BFS on all of these now, given it's all of the rotten oranges, keeping count of the min it was added to the queue.
+         val (minutes, freshOrangesTurned) = doBFS(queue, visited, grid)
+
+        if(freshOrangesTurned != freshOranges) return -1
+
         return minutes
     }
 
-    // First attempt did
-    private fun doBFS(queue: ArrayDeque<Coordinates>, visited: MutableSet<Coordinates>, grid: Array<IntArray>): Int {
-        var minutes = 0
+    // First attempt did not fully work as added too many minutes, visiting all the neighbours doing wasted time
+    // Maybe instead after looking at hint, we could populate the rotten oranges first onto the grid,
+    // then apply BFS for each of these, remembering to include within coordinates, the minute it was added to the queue
+    // Given all rotten tomatoes added to this, the max value of the queue should be the min number of mins, I think
+    private fun doBFS(queue: ArrayDeque<Pair<Coordinates, Int>>, visited: MutableSet<Coordinates>, grid: Array<IntArray>): Pair<Int, Int> {
         val adjacentCoordinates = listOf(
             Coordinates(-1, 0),
             Coordinates(1, 0),
@@ -91,36 +99,37 @@ class RottingOranges {
             Coordinates(0, -1)
         )
 
+        var freshOrangesTurned = 0
+        var minutes = 0
+
         while (queue.isNotEmpty()) {
-            val rottenOrange = queue.removeFirst()
+            val (rottenOrangeCords, rottenOrangeAddedAtMin) = queue.removeFirst()
             // Add itself to visited queue
-            visited.add(rottenOrange)
-            var hasTurnedFreshToRotten = false
+            visited.add(rottenOrangeCords)
 
             // For each neighbour coordinate
             // If neighbour is fresh tomato
             // And not already visited.
             // Convert it to a rotten tomato
+            // Increment the minsTakenToTurnOrange
+            // Count maxValue to turn as presumably this would be the last min to turn all oranges.
             // Add it to the queue
             adjacentCoordinates.forEach {
-                val coordinate = Coordinates(rottenOrange.row + it.row, rottenOrange.column + it.column)
+                val coordinate = Coordinates(rottenOrangeCords.row + it.row, rottenOrangeCords.column + it.column)
                 if (isNeighbourFreshTomatoInGrid(coordinate, grid) && isNotAlreadyVisited(visited, coordinate)) {
-                    // Convert it to rotten tomato
+                    // Rottenize the orange
                     grid[coordinate.row][coordinate.column] = 2
-                    // Add to queue to visit it's neighbours
-                    queue.addLast(Coordinates(coordinate.row, coordinate.column))
-                    hasTurnedFreshToRotten = true
+
+                    val minsTakenToTurnOrange = rottenOrangeAddedAtMin + 1
+                    minutes = maxOf(minutes, minsTakenToTurnOrange)
+
+                    queue.addLast(Coordinates(coordinate.row, coordinate.column) to minsTakenToTurnOrange)
+                    freshOrangesTurned++
                 }
             }
-            // Increment after finding fresh tommy?
-            // Surely this isn't right!! Solves for the base case, at minute 0, but..
-            // Min path...
-
-            if (hasTurnedFreshToRotten) {
-                minutes++
-            }
         }
-        return minutes
+
+        return minutes to freshOrangesTurned
     }
 
     private fun isNotAlreadyVisited(
