@@ -40,7 +40,7 @@ package org.example
 // TODO Clean this up. Improve runtime, perhaps BFS backtracking.
 // But really relying on sorting a fair bit increases that time.
 class CombinationSum {
-    fun combinationSum(candidates: IntArray, target: Int): List<List<Int>> {
+    fun combinationSumIterative(candidates: IntArray, target: Int): List<List<Int>> {
         // Contains bottom up generated list of Value to possible combinations
         val dynamicProgramming = mutableMapOf<Int, List<List<Int>>>()
 
@@ -131,5 +131,49 @@ class CombinationSum {
         val previousValues = this.getOrDefault(target, emptyList<List<Int>>())
         this[target] = previousValues.filter { !it.contains(target) }
 
+    }
+
+
+
+    // Other option is to use BFS backtracking.
+    // So starting at target we always have a path to take any of the candidates
+    // So start at 0, and recursively at each time on the call stack
+    // Keeping track of the runningSum and running elements that took us to this sum
+    // increase the number of candidates that can be included within the sum to target
+    // So for target = 7, with candidates [2,3,6,7]
+    // DFS 2 -> 2+2 -> 2+2+2 -> 2+2+2+2 -> 2+2+3 (popped off the stack) 2+2 -> 2+3 => 2+3+3 => 2+3 => 2 => 3
+    fun combinationSum(candidates: IntArray, target: Int): List<List<Int>> {
+        val combinations = ArrayList<MutableList<Int>>()
+
+        // Launch the Backtracking
+        dfs(0, (candidates.size - 1), arrayListOf(), target, combinations, candidates)
+
+        // Return result
+        return combinations
+    }
+
+    // Define the Backtracking DFS function
+    private fun dfs(
+        currentSum: Int,
+        currentCandidatePosition: Int,
+        potentialCombo: MutableList<Int>,
+        target: Int,
+        outputCombinations: ArrayList<MutableList<Int>>,
+        candidates: IntArray,
+    ) {
+        if (currentSum == target) {
+            // If we reach the target, then the possible combination i found is indeed a valid combination
+         outputCombinations.add(potentialCombo)
+        } else if (currentSum < target) {
+            // Important: Each time we compute a combination from the candidate[i],
+            // we ignore all candidates that come after current candidate in candidates array, Otherwise we'll get duplicates.
+            for (i in 0..currentCandidatePosition) {
+                // obtain the combo we've taken to the currentSum value
+                val potentialCombos = potentialCombo.toMutableList()
+                potentialCombos.add(candidates[i])
+                // Whenever we don't reach the target and we are lower than the target, we keep trying
+                dfs(currentSum + candidates[i], i, potentialCombos, target, outputCombinations, candidates)
+            }
+        }
     }
 }
