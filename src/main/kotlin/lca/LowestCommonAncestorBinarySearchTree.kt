@@ -1,10 +1,5 @@
 package org.example.lca
 
-class TreeNode(var `val`: Int = 0) {
-    var left: TreeNode? = null
-    var right: TreeNode? = null
-}
-
 /***
  * Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST.
  *
@@ -58,7 +53,7 @@ class TreeNode(var `val`: Int = 0) {
  *
  * Adding child nodes to queue
  */
-class LowestCommonAncestoryBinarySearchTree {
+class LowestCommonAncestorBinarySearchTree {
     private fun ArrayDeque<TreeNode?>.doesNotContain(p: TreeNode?, q: TreeNode?): Boolean {
         return (this.contains(p) && this.contains(q))
     }

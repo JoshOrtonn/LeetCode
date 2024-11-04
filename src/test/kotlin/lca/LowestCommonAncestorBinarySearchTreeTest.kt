@@ -1,12 +1,12 @@
 package lca
 
-import org.example.lca.LowestCommonAncestoryBinarySearchTree
+import org.example.lca.LowestCommonAncestorBinarySearchTree
 import org.example.lca.TreeNode
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
-class LowestCommonAncestoryBinarySearchTreeTest{
-    val lca = LowestCommonAncestoryBinarySearchTree()
+class LowestCommonAncestorBinarySearchTreeTest{
+    val lca = LowestCommonAncestorBinarySearchTree()
     val treeNode3 = TreeNode(3)
     val treeNode5 = TreeNode(5)
     val treeNode9 = TreeNode(9)
