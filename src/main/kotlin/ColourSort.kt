@@ -11,8 +11,7 @@ class ColourSort {
     // We insert the currentElementToCompare in this place.
     // We shouldn't worry about inserting in place, as we should have
     // moved each element greater than the current along by one as we've done it.
-    fun sortColors(nums: IntArray): IntArray {
-
+    fun insertionSortColors(nums: IntArray): IntArray {
         for(i in 1 .. nums.lastIndex){
             val elementToInsert = nums[i]
 
@@ -36,5 +35,26 @@ class ColourSort {
 
         return nums
     }
+
+    // Bubble Sort: O(n^2) worst case, if all elements incorrectly placed to begin with.
+    fun bubbleSortColors(array: IntArray) {
+        // Iterate through the array from the last element to the first
+        // with each iteration of i reducing the window to solve.
+        for (i in array.lastIndex downTo 0) {
+            // Iterate through the unsorted portion of the array
+            for (j in 0 until i) {
+                // Compare adjacent elements and swap if necessary
+                // Going along whole array if required.
+                // But swapping until it's found a place whereby the next element is greater than it
+                if (array[j] > array[j + 1]) {
+                    // Swap arr[j] and arr[j+1]
+                    val temp = array[j]
+                    array[j] = array[j + 1]
+                    array[j + 1] = temp
+                }
+            }
+        }
+    }
+    // Most sorting algos use quicksort built in anyway.
 
 }
