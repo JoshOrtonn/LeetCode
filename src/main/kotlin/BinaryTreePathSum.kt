@@ -33,11 +33,26 @@ class BinaryTreePathSum {
         return target in solvePathSum(root)
     }
 
+    /**
+     * ### Return Values, Base Case
+     *
+     * - At root node, what do I want my subtrees to return,
+     *     - Wrong way to think of it. Instead should not relying on backtracking here to calculate,
+     *          but instead minus target from current value downwards.
+     *     - Hence at current node, I want to pass to my children the target - node value
+     * - Base case: leaf node, which won’t have any children.
+     *     - if the targetValue - leafNode value is 0, then we return true, we have found a match
+     *     - Otherwise we return false.
+     *     - How to ensure the last one, is not the most important one…
+     * - Base case: null node, return false.
+     */
+
     fun solvePathSumWithoutList(node: TreeNode?, target: Int): Boolean {
-        if (node == null) return false // Really hate this inversion of control, but...
-        // Lets see if we can make the return list a bit better.
+        if (node == null) return false // Base case empty tree, return false
+        // Calculate new running current target
         val newCurrentTarget = target - node.value
 
+        // If leaf node..
         if (node.left == null && node.right == null) {
             // Returns true if we've found a path from root to leaf, whereby the value is minus'd each step to 0.
             return newCurrentTarget == 0
@@ -48,6 +63,7 @@ class BinaryTreePathSum {
 
 
         // Return if any paths are true
+        // I prefer this to doing it inline, it just helps me debug slightly easier.
         return leftPaths || rightPaths
     }
 }
