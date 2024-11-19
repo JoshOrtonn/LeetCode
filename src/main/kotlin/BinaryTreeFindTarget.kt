@@ -26,10 +26,10 @@ class BinaryTreeFindTarget {
         if(node.value == target) return true
         if(node.left == null && node.right == null) return false
 
-        val left = findTarget(target, node.left)
-        val right = findTarget(target, node.right)
 
-        return left || right
+        // This will short circuit rather than assigning as separate then evaluating
+        // Only the second condition will be run on false of left.
+        return findTarget(target, node.left) || findTarget(target, node.right)
 
     }
 }
