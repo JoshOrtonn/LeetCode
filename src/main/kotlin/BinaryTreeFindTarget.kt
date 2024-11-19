@@ -30,6 +30,9 @@ class BinaryTreeFindTarget {
         // This will short circuit rather than assigning as separate then evaluating
         // Only the second condition will be run on false of left.
         return findTarget(target, node.left) || findTarget(target, node.right)
-
     }
+
+    // Space Complexity, is just O(N) where N is the number of frames on the call stack
+    // Which could be at worst case N number of nodes on the binary Tree
+    // Time Complexity, again is O(N) where N is the number of nodes on the binary tree.
 }
