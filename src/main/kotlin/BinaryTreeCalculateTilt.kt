@@ -70,4 +70,8 @@ class BinaryTreeCalculateTilt {
         // Return sum of self, left and right subtree to parent
         return leftSubTreeSum + rightSubTreeSum + treeNode.value
     }
+    //Time Complexity: O(N), where N is the number of nodes in the tree.
+    // We visit each node exactly once, and at each node, we perform constant time work.
+    //Space Complexity: O(N), where N is the number of nodes.
+    //  A total of N call frames have to be allocated, one for each node in the tree.
 }
