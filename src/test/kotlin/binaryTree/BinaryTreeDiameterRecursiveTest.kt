@@ -1,5 +1,7 @@
-import org.example.BinaryTreeDiameter.TreeNode
-import org.example.BinaryTreeDiameterRecursive
+package binaryTree
+
+import org.example.binaryTree.BinaryTreeDiameter.TreeNode
+import org.example.binaryTree.BinaryTreeDiameterRecursive
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 

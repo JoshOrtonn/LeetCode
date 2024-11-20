@@ -1,4 +1,4 @@
-package org.example
+package org.example.binaryTree
 
 class BinaryTreePathSum {
     class TreeNode(var value: Int) {

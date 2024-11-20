@@ -1,7 +1,8 @@
-import org.example.BinaryTreeGoodNodes
-import org.example.BinaryTreeGoodNodes.TreeNode
-import org.example.BinaryTreeGoodNodesList
-import org.example.BinaryTreeGoodNodesList.*
+package binaryTree
+
+import org.example.binaryTree.BinaryTreeGoodNodes
+import org.example.binaryTree.BinaryTreeGoodNodes.TreeNode
+import org.example.binaryTree.BinaryTreeGoodNodesList
 import org.junit.jupiter.api.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals

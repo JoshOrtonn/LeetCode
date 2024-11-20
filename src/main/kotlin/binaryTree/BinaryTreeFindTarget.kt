@@ -1,4 +1,4 @@
-package org.example
+package org.example.binaryTree
 
 class BinaryTreeFindTarget {
     class TreeNode(var value: Int){

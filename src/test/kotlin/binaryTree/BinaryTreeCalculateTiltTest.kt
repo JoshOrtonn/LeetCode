@@ -1,5 +1,7 @@
-import org.example.BinaryTreeCalculateTilt
-import org.example.BinaryTreeCalculateTilt.TreeNode
+package binaryTree
+
+import org.example.binaryTree.BinaryTreeCalculateTilt
+import org.example.binaryTree.BinaryTreeCalculateTilt.TreeNode
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 

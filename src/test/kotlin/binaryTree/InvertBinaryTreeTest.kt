@@ -1,5 +1,7 @@
-import org.example.InvertBinaryTree
-import org.example.TreeNode
+package binaryTree
+
+import org.example.binaryTree.InvertBinaryTree
+import org.example.binaryTree.TreeNode
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals

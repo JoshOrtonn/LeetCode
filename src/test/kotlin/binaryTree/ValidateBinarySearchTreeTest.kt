@@ -1,5 +1,7 @@
-import org.example.ValidateBinarySearchTree
-import org.example.ValidateBinarySearchTree.TreeNode
+package binaryTree
+
+import org.example.binaryTree.ValidateBinarySearchTree
+import org.example.binaryTree.ValidateBinarySearchTree.TreeNode
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

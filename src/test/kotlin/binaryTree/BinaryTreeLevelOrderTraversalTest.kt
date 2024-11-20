@@ -1,5 +1,7 @@
-import org.example.BinaryTreeLevelOrderTraversal
-import org.example.BinaryTreeLevelOrderTraversal.*
+package binaryTree
+
+import org.example.binaryTree.BinaryTreeLevelOrderTraversal
+import org.example.binaryTree.BinaryTreeLevelOrderTraversal.*
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 

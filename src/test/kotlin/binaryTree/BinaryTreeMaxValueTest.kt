@@ -1,5 +1,7 @@
-import org.example.BinaryTreeMaxValue
-import org.example.BinaryTreeMaxValue.TreeNode
+package binaryTree
+
+import org.example.binaryTree.BinaryTreeMaxValue
+import org.example.binaryTree.BinaryTreeMaxValue.TreeNode
 import org.junit.jupiter.api.Assertions.assertEquals
 import kotlin.test.Test
 

@@ -1,5 +1,7 @@
-import org.example.BinaryTreeMaxDepth
-import org.example.BinaryTreeMaxDepth.TreeNode
+package binaryTree
+
+import org.example.binaryTree.BinaryTreeMaxDepth
+import org.example.binaryTree.BinaryTreeMaxDepth.TreeNode
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 

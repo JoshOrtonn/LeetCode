@@ -1,5 +1,7 @@
-import org.example.BinaryTreePathSum
-import org.example.BinaryTreePathSum.TreeNode
+package binaryTree
+
+import org.example.binaryTree.BinaryTreePathSum
+import org.example.binaryTree.BinaryTreePathSum.TreeNode
 import org.junit.jupiter.api.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue

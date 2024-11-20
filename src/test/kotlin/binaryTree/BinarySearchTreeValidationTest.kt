@@ -1,4 +1,6 @@
-import org.example.BinarySearchTreeValidation
+package binaryTree
+
+import org.example.binaryTree.BinarySearchTreeValidation
 import org.junit.jupiter.api.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue

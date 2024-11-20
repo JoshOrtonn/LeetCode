@@ -1,4 +1,4 @@
-package org.example
+package org.example.binaryTree
 
 import kotlin.math.abs
 

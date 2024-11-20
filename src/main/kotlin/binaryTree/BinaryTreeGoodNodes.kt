@@ -1,4 +1,4 @@
-package org.example
+package org.example.binaryTree
 
 /**
  * Given the root node of a binary tree, write a function to find the number of “good nodes” in the tree.

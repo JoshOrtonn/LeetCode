@@ -1,6 +1,6 @@
-package org.example
+package org.example.binaryTree
 
-import org.example.BinaryTreeDiameter.TreeNode
+import org.example.binaryTree.BinaryTreeDiameter.TreeNode
 
 // Fast runtime
 class BinaryTreeDiameterRecursive{

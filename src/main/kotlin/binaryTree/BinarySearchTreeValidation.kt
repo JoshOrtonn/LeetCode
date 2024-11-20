@@ -1,4 +1,4 @@
-package org.example
+package org.example.binaryTree
 
 /**
  * Given root of a binary tree, determine if it is a valid binary search tree

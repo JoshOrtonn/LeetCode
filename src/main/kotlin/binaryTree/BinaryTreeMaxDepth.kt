@@ -1,4 +1,4 @@
-package org.example
+package org.example.binaryTree
 
 class BinaryTreeMaxDepth {
     class TreeNode(var value: Int) {

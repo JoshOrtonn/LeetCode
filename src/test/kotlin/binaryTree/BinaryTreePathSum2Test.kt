@@ -1,8 +1,9 @@
-import org.example.BinaryTreePathSum2
-import org.example.BinaryTreePathSum2.TreeNode
+package binaryTree
+
+import org.example.binaryTree.BinaryTreePathSum2
+import org.example.binaryTree.BinaryTreePathSum2.TreeNode
 import org.junit.jupiter.api.Test
 import kotlin.test.assertContentEquals
-import kotlin.test.assertEquals
 
 class BinaryTreePathSum2Test {
     private val binaryTreePathSum = BinaryTreePathSum2()

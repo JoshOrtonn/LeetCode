@@ -1,16 +1,16 @@
-import org.example.BinaryTreeFindTarget
-import org.example.BinaryTreeFindTarget.TreeNode
+package binaryTree
+
+import org.example.binaryTree.BinaryTreeSumOfAllNodes
+import org.example.binaryTree.BinaryTreeSumOfAllNodes.*
 import org.junit.jupiter.api.Test
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import kotlin.test.assertEquals
 
-class BinaryTreeFindTargetTest{
-    private val binaryTreeFindTarget = BinaryTreeFindTarget()
-
+class BinaryTreeSumOfAllNodesTest {
+    val binaryTreeSumOfAllNodes = BinaryTreeSumOfAllNodes()
     @Test
-    fun shouldFindTargetInBinaryTree() {
-        val treeNode3 = TreeNode(3)
+    fun shouldSumAllNodes(){
         val treeNode1 = TreeNode(1)
+        val treeNode3 = TreeNode(3)
         val treeNode6 = TreeNode(6)
         val treeNode9 = TreeNode(9)
         val treeNode2 = TreeNode(2).apply {
@@ -25,14 +25,13 @@ class BinaryTreeFindTargetTest{
             left = treeNode2
             right = treeNode7
         }
-
-        assertTrue(binaryTreeFindTarget.findTarget(3, treeNode4))
+        assertEquals(32, binaryTreeSumOfAllNodes.solve(treeNode4))
     }
 
     @Test
-    fun shouldNotFindTargetInBinaryTree() {
-        val treeNode3 = TreeNode(3)
+    fun shouldCountNumberOfNodes(){
         val treeNode1 = TreeNode(1)
+        val treeNode3 = TreeNode(3)
         val treeNode6 = TreeNode(6)
         val treeNode9 = TreeNode(9)
         val treeNode2 = TreeNode(2).apply {
@@ -47,7 +46,6 @@ class BinaryTreeFindTargetTest{
             left = treeNode2
             right = treeNode7
         }
-        assertFalse(binaryTreeFindTarget.findTarget(18, treeNode4))
+        assertEquals(7, binaryTreeSumOfAllNodes.countNumberOfNodes(treeNode4))
     }
-
 }

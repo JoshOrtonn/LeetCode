@@ -1,4 +1,4 @@
-package org.example
+package org.example.binaryTree
 
 /**
  * Given the root of a binary tree, write a recursive function to find the diameter of the tree.
