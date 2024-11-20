@@ -14,8 +14,6 @@ class BinaryTreeCalculateTilt {
         var left: TreeNode? = null
         var right: TreeNode? = null
     }
-    data class TiltToSum(val tilt: Int, val sum: Int)
-
     /**
      * The tilt at any node is considered to be the sum of it’s left subtree, minus the sum of it’s right subtree (absolute) so it’s positive.
      *
