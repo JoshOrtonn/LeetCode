@@ -43,18 +43,8 @@ node = IntGraphNode(1, [IntGraphNode(2), IntGraphNode(3)])
  */
 class CloneGraph {
     fun clone(node: IntGraphNode): Map<Int, Set<Int>> {
-        val neighbourMap = mutableMapOf<Int, Set<Int>>()
-        val outputMap = mutableMapOf<Int, Set<Int>>()
-
+        // DFS to visit all neighbours and collate some adjacency matrix
         return DFS(node)
-
-        //  // put itself as key, and each of it's neighbours as values
-        //  // And then put each of neighbours as key, and itself as value
-        //  node.neighbours.forEach { neighbour: IntGraphNode ->
-        //   // Run DFS for each neighbour
-        //    neighbourMap.put(node.value, map.getOrDefault(node.value, setOf()) + neighbour.value)
-        //    neighbourMap.put(neighbour.value, map.getOrDefault(neighbour.value, setOf()) + node.value)
-        //  }
     }
 
     fun DFS(node: IntGraphNode): Map<Int,Set<Int>> {
@@ -84,3 +74,15 @@ class IntGraphNode(var value: Int){
     var neighbours: List<IntGraphNode> = emptyList()
 }
 
+/**
+ * Complexity Analysis
+ * Time Complexity: O(N + M) where N is the number of nodes and M is
+ * the number of edges in the graph for the depth-first search traversal.
+ * Space Complexity: O(N + M) where N is the number of nodes in the graph and M is the number of edges in the graph.
+ * The space complexity is due to the adjacency list that stores the graph structure:
+ * each of the N nodes is stored once as the keys,
+ * and each of the M edges is stored as part of the values in the dictionary.
+ *
+ *
+ *
+ */
