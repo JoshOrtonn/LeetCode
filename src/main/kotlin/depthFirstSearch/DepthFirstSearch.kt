@@ -29,7 +29,6 @@ class DepthFirstSearch {
         val stack = ArrayDeque<Int>()
         val visited = mutableSetOf<Int>()
 
-        // Is this correct?
         val startingNode = adjacencyMatrix[0]?.first()
         if (startingNode != null) {
             stack.addFirst(startingNode)
