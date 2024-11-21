@@ -1,4 +1,4 @@
-package adjacencyListMakingPractice
+package depthFirstSearch
 
 import org.example.adjacencyListMakingPractice.AdjacencyListPractice
 import org.junit.jupiter.api.Test
