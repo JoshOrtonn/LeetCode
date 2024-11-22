@@ -63,5 +63,10 @@ class SurroundedRegions{
             }
         }
         return boundaryTouched
+
+        // Time complexity: O(n*m) where n and m are rows and columns of a grid + time doing DFS (which in worst case is searching the entire grid, so O(n*m)
+        // but given it's then O(n*m) + O(n*m) it reduces down to given only small scale factor to O(n*m)
+        // Space complexity: O(n*m) for the grid + O(n*m) worst case path + O(n*m) visited + stack size
+        // But ultimately again it scales down to O(n*m) given O(3*n*m) is not a massively bigger factor.
     }
 }
