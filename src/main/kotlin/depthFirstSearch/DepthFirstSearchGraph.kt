@@ -2,7 +2,7 @@ package org.example.depthFirstSearch
 
 import org.example.adjacencyListMakingPractice.AdjacencyListPractice
 
-class DepthFirstSearch {
+class DepthFirstSearchGraph {
     private val edges = listOf(listOf(0, 1), listOf(1, 2), listOf(2, 3), listOf(3, 0), listOf(0, 2))
 
     private val adjacencyMatrix: Map<Int, Set<Int>> =
