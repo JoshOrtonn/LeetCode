@@ -15,24 +15,22 @@ class GraphValidTree {
     // Do DFS compare visited Set to bidirectional Adjacency matrix size.
     // If different return false
     // Tricky part is detecting cycles, given bidirectional nature given a tree is not a cycle too.
-    //
-    //
     fun isValid(input: List<List<Int>>): Boolean {
         // Create bidirectional Adjacency Matrix
         // Do DFS compare visited Set to bidirectional Adjacency matrix size.
+        // As in connected graph all should be visited
         // If different return false
-        // Tricky part is detecting cycles, given bidirectional nature given a tree is not a cycle too.
+        // Tricky part is detecting cycles, with bidirectional nature given a tree is not a cycle too.
         val adjacencyMatrix = createBiDirectionalAdjacencyMatrix(input)
-        val startingNode = adjacencyMatrix[0]!!.first()
+        val startingNode = adjacencyMatrix.keys.first()
         val visitedSet = mutableSetOf<Int>()
-//
+
 //        return recursiveDFS(startingNode, adjacencyMatrix, visitedSet, null)
 //                && adjacencyMatrix.size == visitedSet.size
         return iterativeDFS(startingNode, adjacencyMatrix, visitedSet)
                 && adjacencyMatrix.size == visitedSet.size
     }
 
-    // TODO Debug these and fully understand the flow of parent in the cycle detection
     private fun recursiveDFS(
         currentNode: Int,
         adjacencyMatrix: Map<Int, Set<Int>>,
@@ -54,7 +52,7 @@ class GraphValidTree {
 
             }
         }
-        // Assume if we've hit here that no conflict is found
+        // Assume if we've hit here that no cycle has been found
         return true
     }
 
@@ -69,14 +67,17 @@ class GraphValidTree {
         val parent = mutableMapOf<Int, Int>()
 
         while(stack.isNotEmpty()) {
-            val node = stack.removeFirst()
-            visitedSet.add(node)
-            adjacencyMatrix[node]?.forEach {
-                if (it !in visitedSet) {
-                    stack.addFirst(it)
-                    parent[it] = node
-                    // Essentially if it has already been visited, BUT it was not the previous node that added it to the stack
-                } else if (it in visitedSet && it != parent[node]) {
+            val currentNode = stack.removeFirst()
+            visitedSet.add(currentNode)
+            adjacencyMatrix[currentNode]?.forEach { neighbour: Int ->
+                if (neighbour !in visitedSet) {
+                    stack.addFirst(neighbour)
+                    parent[neighbour] = currentNode // Mark parent of it, as node, and not
+                    // Note this can be overwritten, if two nodes add it as a neighbour to the stack
+
+                    // Essentially if it has already been visited,
+                    // BUT it was not the previous node (parent) that added it to the stack
+                } else if (neighbour in visitedSet && neighbour != parent[currentNode]) {
                     // Else if in visited set, but not just the parent, return true for cycle detected.
                     return false
 
