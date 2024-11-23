@@ -1,5 +1,13 @@
 package org.example.breadthFirstSearch
 
+/*
+DESCRIPTION (credit Leetcode.com)
+You are given an m x n binary matrix grid where each cell contains either a 0 or a 1.
+
+Write a function that returns a matrix of the same dimensions where each cell contains the distance to the nearest 0 in the original matrix.
+The distance between two adjacent cells is 1. If there is no 0 in the grid, return -1 for each cell.
+
+ */
 class ZeroOneMatrix {
     data class Coordinate(val row: Int, val column: Int)
     fun distanceFromZero(input: List<List<Int>>): List<List<Int>> {
@@ -49,4 +57,4 @@ class ZeroOneMatrix {
         return outputList
     }
 }
-
+// TODO figure out complexities
