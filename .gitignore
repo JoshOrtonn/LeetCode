@@ -14,6 +14,8 @@ build/
 *.ipr
 out/
 !**/src/main/**/out/
+src/main/kotlin/karat/
+src/test/kotlin/karat/
 !**/src/test/**/out/
 
 ### Eclipse ###
