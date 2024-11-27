@@ -7,40 +7,7 @@ package org.example.depthFirstSearch
  * The keys of the adjacency list are the values of the nodes,
  * and the values are the neighbors of the nodes.
  */
-/**
-Given a reference to a variable node which is part of an undirected, connected graph, write a function to return a copy of the graph as an adjacency list in dictionary form.
-The keys of the adjacency list are the values of the nodes, and the values are the neighbors of the nodes.
 
-node is an instance of the following class, where neighbors is a list of references to other nodes in the graph (also of type IntGraphNode):
-
-class IntGraphNode:
-def __init__(self, value = 0, neighbors = None):
-self.value = value
-self.neighbors = neighbors if neighbors is not None else []
-EXAMPLES
-Example 1:
-
-Input:
-node = IntGraphNode(1, [IntGraphNode(2), IntGraphNode(3)])
- */
-
-
-/**
-Given a reference to a variable node which is part of an undirected, connected graph, write a function to return a copy of the graph as an adjacency list in dictionary form.
-The keys of the adjacency list are the values of the nodes, and the values are the neighbors of the nodes.
-
-node is an instance of the following class, where neighbors is a list of references to other nodes in the graph (also of type IntGraphNode):
-
-class IntGraphNode:
-def __init__(self, value = 0, neighbors = None):
-self.value = value
-self.neighbors = neighbors if neighbors is not None else []
-EXAMPLES
-Example 1:
-
-Input:
-node = IntGraphNode(1, [IntGraphNode(2), IntGraphNode(3)])
- */
 class CloneGraph {
     fun clone(node: IntGraphNode): Map<Int, Set<Int>> {
         // DFS to visit all neighbours and collate some adjacency matrix

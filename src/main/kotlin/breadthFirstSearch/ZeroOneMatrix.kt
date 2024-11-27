@@ -1,5 +1,7 @@
 package org.example.breadthFirstSearch
 
+import kotlin.collections.mutableSetOf as mutableSetOf1
+
 /*
 DESCRIPTION (credit Leetcode.com)
 You are given an m x n binary matrix grid where each cell contains either a 0 or a 1.
@@ -11,7 +13,7 @@ The distance between two adjacent cells is 1. If there is no 0 in the grid, retu
 class ZeroOneMatrix {
     data class Coordinate(val row: Int, val column: Int)
     fun distanceFromZero(input: List<List<Int>>): List<List<Int>> {
-        val visited = mutableSetOf<Coordinate>()
+        val visited = mutableSetOf1<Coordinate>()
         val queue = ArrayDeque<Coordinate>()
 
         val outputList = mutableListOf<MutableList<Int>>()
@@ -53,6 +55,7 @@ class ZeroOneMatrix {
             }
             distance++
         }
+        val set = mutableSetOf1(1,2,3)
 
         return outputList
     }
